@@ -1,3 +1,10 @@
+/*
+ * Paginate.js 0.1
+ * (c) 2013 Will McKenzie
+ * Provided under the MIT License
+ * See http://github.com/OiNutter/paginate.js for more details
+ */
+
 var paginate = function(element,gallery,opts){
 	
 	var container,
