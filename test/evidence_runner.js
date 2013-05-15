@@ -24,7 +24,7 @@
   }
 
   var TestRunner = inherit(ConsoleTestRunner, function(_super) {
-    AutoRunner.RUNNERS.guggenheim = this
+    AutoRunner.RUNNERS.paginate = this
     return {
       _makeResult: function() { return new TestResult(this.logger) }
     }
@@ -58,7 +58,7 @@
     var _super = AutoRunner.prototype.retrieveOptions
     AutoRunner.prototype.retrieveOptions = function() {
       var options = _super.call(this)
-      if (!options.runner) options.runner = 'guggenheim'
+      if (!options.runner) options.runner = 'paginate'
       return options
     }
   })()
@@ -81,7 +81,7 @@
     }
   }
 
-  var globals = [], expected = ['guggenheim', 'Evidence','gallery']
+  var globals = [], expected = ['guggenheim', 'Evidence','gallery','paginate']
   for (var key in window) globals.push(key)
 
   function checkLeakedGlobals() {

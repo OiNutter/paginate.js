@@ -6,10 +6,11 @@
   <link rel="stylesheet" href="test.css">
   <title>Guggenheim unit tests</title>
   <script src="../vendor/zepto.min.js"></script>
+  <script src="../vendor/guggenheim.min.js"></script>
   <script src="../vendor/evidence.min.js"></script>
   <script src="evidence_runner.js"></script>
-  <script src="../src/guggenheim.js"></script>
-  <!--<script src="../dist/guggenheim.min.js"></script>-->
+  <script src="../src/paginate.js"></script>
+  <!--<script src="../dist/paginate.min.js"></script>-->
   <style>
     #get_style_element {
       font-size: 48px;
@@ -18,7 +19,7 @@
   </style>
 </head>
 <body>
-  <h1>Guggenheim unit tests</h1>
+  <h1>Paginate unit tests</h1>
   <p id="results">
     Running… see browser console for results
   </p>
@@ -48,6 +49,8 @@
 
     <div id="empty-container"></div>
 
+    <div id="pagination"></div>
+
   </div><!-- fixtures -->
 
   <script>
@@ -57,6 +60,7 @@
   $(document).ready(function(){
 
     gallery = guggenheim('#guggenheim-container')
+    paginate('#pagination',gallery)
 
     Evidence.Assertions.assertSucceeds = function(func,message){
       var excepted = false,
@@ -123,87 +127,21 @@
       return visible
     }
 
-    Evidence('GuggenheimTest', {
+    Evidence('PaginateTest', {
 
       testInitialises: function(t){
         // Check initialises correctly from string
-        t.assertSucceeds(function(){guggenheim('#guggenheim-container')},'Failed to initialise when passed a string')
-        t.assertSucceeds(function(){guggenheim(document.querySelector('#guggenheim-container'))},'Failed to initialise when passed a DOM element') 
+        t.assertSucceeds(function(){paginate('#pagination',gallery)},'Failed to initialise when passed a string')
+        t.assertSucceeds(function(){paginate(document.querySelector('#pagination'),gallery)},'Failed to initialise when passed a DOM element') 
       },
 
       testExceptsWhenGivenBadElement: function(t){
-        t.assertExcepts(function(){guggenheim('#missing')},'Element #missing does not exist!','Failed to except when passed non existant ID')
+        t.assertExcepts(function(){paginate('#missing',gallery)},'Element #missing does not exist!','Failed to except when passed non existant ID')
       },
 
-      testExceptsWhenGivenEmptyContainer: function(t){
-        t.assertExcepts(function(){guggenheim('#empty-container')},'Gallery is empty','Failed to except when passed an empty gallery')
-      },
-
-      testFiltering: function(t){
-        var els
-
-        // Filter to red items
-        gallery.filter('red')
-        els = getVisibleElements()
-        t.assertEqual(6,els.length,'Filtered to incorrect number of red elements')
-
-        // Filter to red and blue items
-        gallery.filter('red|blue')
-        els = getVisibleElements()
-        t.assertEqual(11,els.length,'Filtered to incorrect number of red or blue elements')      
-
-        //  Filter to red multi items
-        gallery.filter(['red','multi'])
-        els = getVisibleElements()
-        t.assertEqual(3,els.length,'Filtered to incorrect number of red and multi elements')      
-
-        gallery.reset()
-      },
-
-      testOrdering: function(t){
-        var order = [
-                '#item-4',
-                '#item-11',
-                '#item-9',
-                '#item-15',
-                '#item-3',
-                '#item-1',
-                '#item-13',
-                '#item-6',
-                '#item-5',
-                '#item-17',
-                '#item-7',
-                '#item-16',
-                '#item-2',
-                '#item-10',
-                '#item-14',
-                '#item-8',
-                '#item-12'],
-            ids = [],
-            els = []
-
-        els = gallery.order(order)
-       
-       for(var i = 0; i<els.length;i++)
-            ids.push('#' + els[i].getAttribute('id'))
-      
-        t.assertArraysEqual(order,ids,'Elements not in correct order')
-
-        gallery.reset()
-      },
-
-      testCurrentPage: function(t){
-             
-        t.assertEqual(gallery.currentPage(),1,'Not returning correct current page')
-        gallery.jumpTo(2)
-        t.assertEqual(gallery.currentPage(),2,'Not returning correct current page after jump')
-
-        gallery.reset()
-
-      },
-
-      testNumPages: function(t){
-        t.assertEqual(gallery.numPages(),2,'Not returning the correct number of pages')
+      testExceptsWhenNotGivenGallery: function(t){
+        t.assertExcepts(function(){paginate('#pagination')},'No gallery supplied','Failed to except when not passed a gallery')
+        t.assertExcepts(function(){paginate('#pagination',{})},'gallery has no method numPages','Failed to except when not passed a gallery')
       }
 
     })

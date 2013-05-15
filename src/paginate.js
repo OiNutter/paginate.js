@@ -246,6 +246,9 @@ var paginate = function(element,gallery,opts){
 
 	container = (typeof element == 'string') ? document.querySelector(element): element
 	
+	if(!gallery)
+		throw 'No gallery supplied'
+
 	if(!gallery.numPages || !_isFunction(gallery.numPages))
 		throw 'gallery has no method numPages'
 
