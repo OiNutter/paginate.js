@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>guggenheim.js test</title>
+		<title>paginate.js test</title>
 		<style type="text/css">
 			#guggenheim-container{
 				width:800px;
@@ -11,14 +11,37 @@
 			}
 
 			.guggenheim-item{
-				width:790px;
-				height:100px;
+				width:300px;
+				height:300px;
 				background:#900;
 				margin:5px;
 			}
 
 			.guggenheim-item.green{ background:#090; }
 			.guggenheim-item.blue{ background:#009; color:#fff;}
+
+			.paginate-bt,.paginate-dots{
+				width:15px;
+				height:15px;
+				display:inline-block;
+			}
+
+			.paginate-bt{
+				background:#666;
+				color:#fff;
+				text-align: center;
+				margin:0 2px;
+				cursor:pointer;
+			}
+
+			.paginate-bt:hover,.paginate-bt.active{
+				background:#999;
+			}
+
+			.paginate-bt.disabled{
+				background:#bbb;
+				color:#999;
+			}
 
 		</style>
 	</head>
@@ -50,14 +73,12 @@
 		<a onclick='filterEls("blue")'>Blue</a>
 		<a onclick='filterEls("red")'>Red</a>
 		<a onclick='filterEls("green")'>Green</a> |
-		<a onclick='gallery.prev()'>Prev</a>
-		<a onclick="gallery.jumpTo(1)">1</a>
-		<a onclick="gallery.jumpTo(2)">2</a>
-		<a onclick="gallery.jumpTo(3)">3</a>
-		<a onclick='gallery.next()'>Next</a>
-		<script type="text/javascript" src="../src/guggenheim.js"></script>
+		<div id="pagination"></div>
+		<script type="text/javascript" src="../vendor/guggenheim.min.js"></script>
+		<script type="text/javascript" src="../src/paginate.js"></script>
 		<script type="text/javascript">
-			var gallery = guggenheim('#guggenheim-container',{rows:3,cols:1,after:function(els){console.log(els)}})
+			var gallery = guggenheim('#guggenheim-container'),
+			pagination = paginate('#pagination',gallery)
 
 			function reorder(){
 				var order = [
