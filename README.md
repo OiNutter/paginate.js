@@ -96,6 +96,16 @@ pagination.refresh()
 
 Causes the pagination to reload the number of pages and re-render itself. This is called automatically whenever one of the `resetFuncs` are called, in the case of a Guggenheim gallery this is either `filter` or `reset`
 
+###CSS###
+
+No CSS is required for Paginate to work, but classes are added to the elements to help you style them up.
+
+* `.paginate-bt` - All pagination buttons.
+* `.paginate-dots` - Pagination ellipses.
+* `.paginate-first-bt`,`.paginate-last-bt`,`.paginate-jumpback-bt`,`.paginate-jumpforward-bt`,`.paginate-prev-bt`,`.paginate-next-bt` - Cmon, I'm sure you can work this out :smirk:.
+* `.disabled` - Disabled buttons.
+* `.active` - Currently selected page.
+
 Examples
 --------
 
