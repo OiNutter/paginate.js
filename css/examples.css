@@ -115,9 +115,10 @@ body{
 	#pagination a.disabled{
 		background:#ccc;
 		color:#999;
+		cursor:default;
 	}
 
-	#pagination a:hover,#pagination a.active{
+	#pagination a:not(.disabled):hover,#pagination a.active{
 		background:#333;
 	}
 
