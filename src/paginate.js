@@ -21,13 +21,13 @@ var paginate = function(element,gallery,opts){
 		// renders the pagination buttons
 		render = function(){
 
-			if(numPages==1)
+			container.innerHTML = ''
+
+			if(numPages==1 && !options.showSinglePage)
 				return
 
 			var i,
 				pageLimit = Math.min((start-1)+options.numPagesToShow,numPages)
-
-			container.innerHTML = ''
 
 			//render first button
 			if(options.limitButtons)
@@ -67,14 +67,12 @@ var paginate = function(element,gallery,opts){
 				target,
 				page
 
-			console.log(typeof e)
 			if(typeof e == 'object'){
 				button = e.currentTarget || e.target
 				target = button['data-target']
 			} else{
 				target = e
 			}
-
 
 			switch(target){
 				case 'first': 
@@ -289,6 +287,7 @@ var paginate = function(element,gallery,opts){
 		fastForwardButtons:false,
 		numPagesToShow:5,
 		start:1,
+		showSinglePage:false,
 		onChange: function(page){},
 		numPagesFunc: 'numPages',
 		navFunc: 'jumpTo',

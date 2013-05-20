@@ -58,6 +58,7 @@ below.
 * fastForwardbuttons - `false` Whether to show fast forward buttons that jump forward or back by the shown number of pages.
 * numPagesToShow - `5` The number of page buttons to show.
 * start - `1` The page to start drawing from.
+* showSinglePage - `false` Whether to show the pagination if there is only one page.
 * onChange - `function(){}` Function to call when page is changed.
 * numPagesFunc - `numPages` Name of function on the gallery object that returns the number of pages in the gallery
 * navFunc - `jumpTo` Name of the navigation function on the gallery object that changes the page.
