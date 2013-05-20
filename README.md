@@ -102,7 +102,7 @@ No CSS is required for Paginate to work, but classes are added to the elements t
 
 * `.paginate-bt` - All pagination buttons.
 * `.paginate-dots` - Pagination ellipses.
-* `.paginate-first-bt`,`.paginate-last-bt`,`.paginate-jumpback-bt`,`.paginate-jumpforward-bt`,`.paginate-prev-bt`,`.paginate-next-bt` - Cmon, I'm sure you can work this out :smirk:.
+* `.paginate-first-bt`, `.paginate-last-bt`, `.paginate-jumpback-bt`, `.paginate-jumpforward-bt`, `.paginate-prev-bt`, `.paginate-next-bt` - Cmon, I'm sure you can work this out :smirk:.
 * `.disabled` - Disabled buttons.
 * `.active` - Currently selected page.
 
