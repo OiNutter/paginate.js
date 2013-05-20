@@ -112,6 +112,15 @@ body{
 		font-weight:bold;
 	}
 
+	#pagination a.disabled{
+		background:#ccc;
+		color:#999;
+	}
+
+	#pagination a:hover,#pagination a.active{
+		background:#333;
+	}
+
 	a.button.current{
 		background:#06f;
 	}
