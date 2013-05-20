@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Paginate.js</title>
+<link type="text/css" rel="stylesheet" href="css/examples.css" media="screen"/>
+</head>
+<body>
+	
+<div id="container">
+	<div id="header">
+		<h1>Paginate.js - Examples</h1>
+	</div>
+	<div id="middle">
+		<a name="top"></a>
+		<p>Here is a demo for the Paginate.js pagination plugin for <a href="https://github.com/OiNutter/guggenheim.js">Guggenheim.js</a>. Use the controls at the bottom to manipulate the gallery.</p>
+		
+		<hr/>
+		<a name="basic"></a>
+		<h2>Gallery</h2>
+		<div id="basic-gallery" class="gallery">
+			<div class="guggenheim-slider">
+				<div class="guggenheim-item marvel male powers avengers 196201"><span class="sprite antman"></span></div>
+				<div class="guggenheim-item dc male nopowers justiceleague 193905"><span class="sprite batman"></span></div>
+				<div class="guggenheim-item marvel male powers avengers 194103"><span class="sprite captain-america"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 197505"><span class="sprite colossus"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 196309"><span class="sprite cyclops"></span></div>
+				<div class="guggenheim-item dc male powers justiceleague 194001"><span class="sprite flash"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 199008"><span class="sprite gambit"></span></div>
+				<div class="guggenheim-item dc male powers justiceleague 194007"><span class="sprite green-lantern"></span></div>
+				<div class="guggenheim-item marvel male nopowers avengers 196409"><span class="sprite hawkeye"></span></div>
+				<div class="guggenheim-item dc male powers justiceleague 194001"><span class="sprite hawkman"></span></div>
+				<div class="guggenheim-item marvel male powers avengers 196205"><span class="sprite hulk"></span></div>
+				<div class="guggenheim-item marvel male powers fantasticfour 196111"><span class="sprite human-torch"></span></div>
+				<div class="guggenheim-item marvel female powers fantasticfour 196111"><span class="sprite invisible-woman"></span></div>
+				<div class="guggenheim-item marvel male nopowers avengers 196303"><span class="sprite iron-man"></span></div>
+				<div class="guggenheim-item marvel female powers xmen 196309"><span class="sprite jean-grey"></span></div>
+				<div class="guggenheim-item dc male powers justiceleague 195511"><span class="sprite martian-manhunter"></span></div>
+				<div class="guggenheim-item marvel male powers fantasticfour 196111"><span class="sprite mr-fantastic"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 197505"><span class="sprite nightcrawler"></span></div>
+				<div class="guggenheim-item dc male nopowers nogroup 199509"><span class="sprite nightwing"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 196309"><span class="sprite professor-x"></span></div>
+				<div class="guggenheim-item marvel female powers xmen 198111"><span class="sprite rogue"></span></div>
+				<div class="guggenheim-item marvel female powers avengers 196403"><span class="sprite scarlet-witch"></span></div>
+				<div class="guggenheim-item marvel male powers nogroup 196208"><span class="sprite spiderman"></span></div>
+				<div class="guggenheim-item marvel female powers xmen 197505"><span class="sprite storm"></span></div>
+				<div class="guggenheim-item dc male powers justiceleague 193804"><span class="sprite superman"></span></div>
+				<div class="guggenheim-item marvel male powers fantasticfour 196111"><span class="sprite thing"></span></div>
+				<div class="guggenheim-item marvel male powers avengers 196208"><span class="sprite thor"></span></div>
+				<div class="guggenheim-item marvel female powers avengers 196306"><span class="sprite wasp"></span></div>
+				<div class="guggenheim-item marvel male powers xmen 197408"><span class="sprite wolverine"></span></div>
+				<div class="guggenheim-item dc female powers justiceleague 194112"><span class="sprite wonder-woman"></span></div>
+			</div>
+			<div id="pagination"></div>
+		</div>
+		
+		<h2>Order</h2>
+		<a onclick="orderAlphabetically()" class="button order-bt current alphabetical">Order Alphabetically</a>
+		<a onclick="orderByAppearance()" class="button order-bt appearance">Order By First Appearance</a>
+		<a onclick="orderByTeam()" class="button order-bt team">Order By Team</a>
+
+		<hr/>
+
+		<h2>Filter</h2>
+		<form id="filter-form">
+
+			<div class="filter-set">
+				<h3>Publisher</h3>
+				<label>
+					<input type="radio" value="" checked="checked" name="publisher" onclick="filterGallery()">
+					All
+				</label>
+
+				<label>
+					<input type="radio" value="dc" name="publisher" onclick="filterGallery()">
+					DC
+				</label>
+
+				<label>
+					<input type="radio" value="marvel" name="publisher" onclick="filterGallery()">
+					Marvel
+				</label>
+			</div>
+
+			<div class="filter-set">
+				<h3>Gender</h3>
+				<label>
+					<input type="radio" value="" checked="checked" name="gender" onclick="filterGallery()">
+					All
+				</label>
+
+				<label>
+					<input type="radio" value="male" name="gender" onclick="filterGallery()">
+					Male
+				</label>
+
+				<label>
+					<input type="radio" value="female" name="gender" onclick="filterGallery()">
+					Female
+				</label>
+			</div>
+
+			<div class="filter-set">
+				<h3>Superpowered</h3>
+				<label>
+					<input type="radio" value="" checked="checked" name="powered" onclick="filterGallery()">
+					All
+				</label>
+
+				<label>
+					<input type="radio" value="powers" name="powered" onclick="filterGallery()">
+					Super Powered
+				</label>
+
+				<label>
+					<input type="radio" value="nopowers" name="powered" onclick="filterGallery()">
+					Just A Bad Ass 
+				</label>
+			</div>
+
+			<div class="filter-set double">
+				<h3>Team Affiliation</h3>
+				<label>
+					<input type="checkbox" value="" checked="checked" name="all-teams" onclick="toggleCheckboxes(this); filterGallery()">
+					All
+				</label>
+
+				<label>
+					<input type="checkbox" value="avengers" name="avengers" onclick="toggleCheckboxes(this); filterGallery()" class="team">
+					Avengers
+				</label>
+
+				<label >
+					<input type="checkbox" value="fantasticfour" name="fantasticfour" onclick="toggleCheckboxes(this); filterGallery()" class="team">
+					Fantastic Four 
+				</label>
+
+				<label>
+					<input type="checkbox" value="justiceleague" name="justiceleague" onclick="toggleCheckboxes(this); filterGallery()" class="team">
+					Justice League 
+				</label>
+
+				<label>
+					<input type="checkbox" value="xmen" name="xmen" onclick="toggleCheckboxes(this); filterGallery()" class="team">
+					X Men 
+				</label>
+
+				<label>
+					<input type="checkbox" value="nogroup" name="nogroup" onclick="toggleCheckboxes(this); filterGallery()" class="team">
+					Other / None
+				</label>
+
+			</div>
+		
+		</form>
+
+		<p></p>
+
+		<hr/>
+
+		<h2>Reset</h2>
+
+		<a onclick="resetGallery()" class="button">Reset Gallery</a>
+
+		<hr/>
+
+		<h2>Credits</h2>
+
+		<p>All images are from blo0p's <a href="http://blo0p.deviantart.com/gallery/32499734">Super Hero Poster</a> collection on Deviant Art</p>
+				
+		<hr/>
+
+		<a name="links"></a>
+		<h2>Further Links</h2>
+		
+		<p>Check out the source and usage instructions on <a href="https://github.com/OiNutter/paginate.js">GitHub</a>. 
+		
+	</div>
+</div>
+<script language="Javascript" type="text/javascript" src="js/jquery.min.js"></script>
+<script language="Javascript" type="text/javascript" src="js/guggenheim.min.js"></script>
+<script language="Javascript" type="text/javascript" src="js/paginate.min.js"></script>
+<script type="text/javascript">
+
+		var gallery,
+			pagination
+
+		function resetGallery(){
+			$('input[name="publisher"]').val([''])
+			$('input[name="gender"]').val([''])
+			$('input[name="powered"]').val([''])
+			$('input[type="checkbox"]').val([''])
+			$('.order-bt.current').removeClass('current')
+			$('.order-bt.alphabetical').addClass('current')
+			gallery.reset()
+		}
+
+		function orderAlphabetically(){
+			
+			var els = $('.guggenheim-item')
+
+			$('.order-bt.current').removeClass('current')
+			$('.order-bt.alphabetical').addClass('current')
+
+			els.sort(function(a,b){
+				var nameA = $('span',a)[0].className.replace('sprite ',''),
+					nameB = $('span',b)[0].className.replace('sprite ',''),
+					names = [nameA,nameB].sort()
+
+				return names.indexOf(nameA) - names.indexOf(nameB)
+			})
+
+			gallery.order(els)
+
+		}
+
+		function orderByAppearance(){
+			var els = $('.guggenheim-item'),
+				dateReg = new RegExp('[0-9]{6}')
+
+			$('.order-bt.current').removeClass('current')
+			$('.order-bt.appearance').addClass('current')
+
+			els.sort(function(a,b){
+					var dateA = parseInt(dateReg.exec(a.className)[0]),
+					dateB = parseInt(dateReg.exec(b.className)[0])
+
+				return dateA - dateB
+			})
+
+			gallery.order(els)
+		}
+
+		function orderByTeam(){
+			var els = $('.guggenheim-item'),
+				teamReg = new RegExp('(avengers|fantasticfour|justiceleague|xmen|nogroup)')
+
+			$('.order-bt.current').removeClass('current')
+			$('.order-bt.team').addClass('current')
+
+			els.sort(function(a,b){
+				var teamA = teamReg.exec(a.className)[1],
+					teamB = teamReg.exec(b.className)[1],
+					teams = [teamA,teamB].sort()
+
+				return teams.indexOf(teamA) - teams.indexOf(teamB)
+			})
+
+			gallery.order(els)
+		}
+
+		function filterGallery(){
+			var filters = [],
+				teams = []
+			
+			filters.push($('input[name="publisher"]:checked').val())
+			filters.push($('input[name="gender"]:checked').val())
+			filters.push($('input[name="powered"]:checked').val())
+
+			$('input[type="checkbox"]:checked').each(function(i,item){
+				teams.push(item.value)
+			})
+
+			filters.push(teams.join('|'))
+
+			gallery.filter(filters)
+		}
+
+		function toggleCheckboxes(input){
+			if($('input[type="checkbox"].team:checked').length && input != $('input[name="all-teams"]')[0])
+				$('input[name="all-teams"]').attr('checked',false)
+			else
+				$('input[type="checkbox"]').val([''])
+		}
+
+		window.onload = function(){	
+			gallery = guggenheim('#basic-gallery')
+			pagination = paginate('#pagination',gallery)
+			filterGallery()
+		};
+  
+  /*****************************************************************
+   * Gauges Tracking Code -- PLEASE remove if copying this page!!!!
+   *****************************************************************/
+  var _gauges = _gauges || [];
+  (function() {
+    var t   = document.createElement('script');
+    t.type  = 'text/javascript';
+    t.async = true;
+    t.id    = 'gauges-tracker';
+    t.setAttribute('data-site-id', '519a8e91613f5d3d5d0000d5');
+    t.src = '//secure.gaug.es/track.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(t, s);
+  })();
+</script>
+</body>
+</html>
