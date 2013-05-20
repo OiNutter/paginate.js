@@ -67,8 +67,9 @@ var paginate = function(element,gallery,opts){
 				target,
 				page
 
-			if(typeof e == 'event'){
-				button = e.currentTarget
+			console.log(typeof e)
+			if(typeof e == 'object'){
+				button = e.currentTarget || e.target
 				target = button['data-target']
 			} else{
 				target = e
