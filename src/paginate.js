@@ -14,6 +14,9 @@ var paginate = function(element,gallery,opts){
 		numPages,
 		handlers = {},
     	zid=1,
+    	galleryFunctions = {},
+    	i,
+    	f,
 
 		// renders the pagination buttons
 		render = function(){
@@ -24,6 +27,8 @@ var paginate = function(element,gallery,opts){
 			var i,
 				pageLimit = Math.min((start-1)+options.numPagesToShow,numPages)
 
+			container.innerHTML = ''
+
 			//render first button
 			if(options.limitButtons)
 				_renderButton('first','|&lt;')
@@ -32,10 +37,16 @@ var paginate = function(element,gallery,opts){
 				_renderButton('jumpback','&lt;&lt;')
 			
 			//render prev button
-			_renderButton('prev','|&lt;')
+			_renderButton('prev','&lt;')
+
+			if(options.showDots && start!=1)
+				_renderDots()
 		
 			for(i=start;i<=pageLimit;i++)
 				_renderButton('page',i,i)
+
+			if(options.showDots && i<numPages)
+				_renderDots()
 	
 			//render next button
 			_renderButton('next','&gt;')
@@ -52,9 +63,17 @@ var paginate = function(element,gallery,opts){
 		//jumps to a specific page
 		goToPage = function(e){
 
-			var button = e.currentTarget,
-				target = button['data-target'],
+			var button,
+				target,
 				page
+
+			if(typeof e == 'event'){
+				button = e.currentTarget
+				target = button['data-target']
+			} else{
+				target = e
+			}
+
 
 			switch(target){
 				case 'first': 
@@ -81,7 +100,7 @@ var paginate = function(element,gallery,opts){
 			}
 
 			if(page!=current){
-				gallery.jumpTo(page)
+				gallery[options.navFunc](page)
 				current=page
 				if(current >= start && current <= Math.min((start-1)+options.numPagesToShow,numPages-(start-1))){
 					_updateButtons()
@@ -96,12 +115,18 @@ var paginate = function(element,gallery,opts){
 					else if(start>numPages)
 						start = numPages
 
-					container.innerHTML = ''
 					render()
 				}
 				options.onChange(page)
 			}
 
+		},
+
+		refresh = function(){
+			numPages = gallery[options.numPagesFunc]()
+			start = 1
+			current = 1
+			render()
 		}
 
 	function _renderButton(klass,label,target){
@@ -113,6 +138,15 @@ var paginate = function(element,gallery,opts){
 		button = _updateButton(button)	
 
 		container.appendChild(button)
+	}
+
+	function _renderDots(){
+		var dots = document.createElement('span')
+		
+		dots.className='paginate-dots'
+		dots.innerHTML = '...'
+		
+		container.appendChild(dots)
 	}
 
 	function _updateButtons(){
@@ -248,6 +282,18 @@ var paginate = function(element,gallery,opts){
 
 	// Initialise
 
+	options = _mergeOptions({
+		showDots:true,
+		limitButtons: true,
+		fastForwardButtons:false,
+		numPagesToShow:5,
+		start:1,
+		onChange: function(page){},
+		numPagesFunc: 'numPages',
+		navFunc: 'jumpTo',
+		resetFuncs: ['filter','reset']
+	},opts)
+
 	if(typeof element == 'string' && document.querySelector(element)==null)
 		throw 'Element ' + element + " does not exist!"
 
@@ -256,19 +302,23 @@ var paginate = function(element,gallery,opts){
 	if(!gallery)
 		throw 'No gallery supplied'
 
-	if(!gallery.numPages || !_isFunction(gallery.numPages))
+	if(!gallery[options.numPagesFunc] || !_isFunction(gallery[options.numPagesFunc]))
 		throw 'gallery has no method numPages'
 
-	numPages = gallery.numPages()
+	numPages = gallery[options.numPagesFunc]()
 
-	options = _mergeOptions({
-		showDots:true,
-		numPagesToShow:5,
-		start:1,
-		limitButtons: true,
-		fastForwardButtons:false,
-		onChange: function(page){}
-	},opts)
+	for(i=0;i<options.resetFuncs.length;i++){
+		f = options.resetFuncs[i]
+		if(gallery[f] && _isFunction(gallery[f])){
+			galleryFunctions[f] = gallery[f]
+			gallery[f] = (function(func){
+				return function(){
+					galleryFunctions[func].apply(gallery,arguments)
+					refresh()
+				}
+			})(f)
+		}
+	}
 
 	start = options.start
 	current = start
@@ -276,7 +326,9 @@ var paginate = function(element,gallery,opts){
 	render()
 
 	return {
-		"goToPage":goToPage
+		"goToPage":goToPage,
+		"render":render,
+		"refresh":refresh
 	}
 
 }
