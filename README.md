@@ -99,7 +99,7 @@ Causes the pagination to reload the number of pages and re-render itself. This i
 Examples
 --------
 
-Check out the [demo page](http://oinutter.github.com/paginate.js)
+Check out the [demo page](http://oinutter.co.uk/paginate.js)
 
 Building
 --------
