@@ -27,7 +27,11 @@ var paginate = function(element,gallery,opts){
 				return
 
 			var i,
-				pageLimit = Math.min((start-1)+options.numPagesToShow,numPages)
+				pageLimit = Math.min((start-1)+options.numPagesToShow,numPages),
+				startPage = (start+options.numPagesToShow-1 <= numPages) ? start : numPages - options.numPagesToShow + 1
+
+			if(startPage<1)
+				startPage=1
 
 			//render first button
 			if(options.limitButtons)
@@ -42,7 +46,7 @@ var paginate = function(element,gallery,opts){
 			if(options.showDots && start!=1)
 				_renderDots()
 		
-			for(i=start;i<=pageLimit;i++)
+			for(i=startPage;i<=pageLimit;i++)
 				_renderButton('page',i,i)
 
 			if(options.showDots && i<numPages)
