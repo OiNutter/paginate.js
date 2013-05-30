@@ -1,5 +1,5 @@
 /*
- * Paginate.js 0.1
+ * Paginate.js 0.2
  * (c) 2013 Will McKenzie
  * Provided under the MIT License
  * See http://github.com/OiNutter/paginate.js for more details
